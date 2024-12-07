@@ -1,9 +1,6 @@
-import time
-
 def check(nums, target, to_concatenate):
     n_forwards = len(nums)//2
     n_backwards = len(nums)-n_forwards
-    target_as_str = str(target)
     previous_results_forward = {nums[0]}
     previous_results_backwards = {target}
     for i in range(1, n_forwards):
@@ -52,7 +49,4 @@ def solve(fname):
     print(res1)
     print(res2)
 fname = "day7_input.txt"
-t = time.time()
 solve(fname)
-t2 = time.time()
-print(t2-t)
