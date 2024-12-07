@@ -29,7 +29,4 @@ def solve(fname):
     print(res1)
     print(res2)
 fname = "day7_input.txt"
-t = time.time()
 solve(fname)
-t2 = time.time()
-print(t2-t)
