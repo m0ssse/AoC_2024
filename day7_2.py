@@ -25,3 +25,4 @@ def solve(fname):
     print(res1)
     print(res2)
 fname = "day7_input.txt"
+solve(fname)
