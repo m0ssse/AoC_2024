@@ -1,5 +1,3 @@
-import time
-
 def check(nums, target, to_concatenate):
     previous_results = {nums[0]}
     for i in range(1, len(nums)):
