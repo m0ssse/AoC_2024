@@ -68,4 +68,5 @@ def part2(fname):
             checksum+=i*x
     print(checksum)
 fname = "day9_input.txt"
+part1(fname)
 part2(fname)
