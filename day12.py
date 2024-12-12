@@ -35,9 +35,8 @@ def get_perimeter(grid, coords):
     return res
 
 def get_sides(grid, coords):
-    parts_horizontal = {}
     parts_vertical = {}
-    n, m = len(grid), len(grid[0])
+    m = len(grid[0])
     for i, j in coords:
         if j==0 or grid[i][j-1]!=grid[i][j]:
             if (j-1, j, j) not in parts_vertical:
@@ -47,22 +46,7 @@ def get_sides(grid, coords):
             if (j, j+1, j) not in parts_vertical:
                 parts_vertical[(j, j+1, j)] = []
             parts_vertical[(j, j+1, j)].append(i)
-        if i==0 or grid[i-1][j]!=grid[i][j]:
-            if (i-1, i, i) not in parts_horizontal:
-                parts_horizontal[(i-1, i, i)] = []
-            parts_horizontal[(i-1, i, i)].append(j)
-        if i==n-1 or grid[i][j]!=grid[i+1][j]:
-            if (i, i+1, i) not in parts_horizontal:
-                parts_horizontal[(i, i+1, i)] = []
-            parts_horizontal[(i, i+1, i)].append(j)
     res = 0
-    for j_list in parts_horizontal.values():
-        j_list.sort()
-        helper=1
-        for k in range(1, len(j_list)):
-            if j_list[k]-j_list[k-1]!=1:
-                helper+=1
-        res+=helper
     for i_list in parts_vertical.values():
         i_list.sort()
         helper=1
@@ -70,7 +54,7 @@ def get_sides(grid, coords):
             if i_list[k]-i_list[k-1]!=1:
                 helper+=1
         res+=helper
-    return res
+    return 2*res
     
 fname = "day12_input.txt"
 with open(fname) as file:
