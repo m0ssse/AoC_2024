@@ -56,7 +56,7 @@ def get_sides(grid, coords):
                 parts_horizontal[(i, i+1, i)] = []
             parts_horizontal[(i, i+1, i)].append(j)
     res = 0
-    for j_list in parts_horizontal.values():
+    for j_list in parts_vertical.values():
         j_list.sort()
         helper=1
         for k in range(1, len(j_list)):
