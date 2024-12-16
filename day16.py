@@ -35,7 +35,7 @@ def part2(grid):
                 targeti, targetj = i, j
     maxcost, visited = part1(grid)
     allpaths = []
-    currpath = [(starti, startj, 0, 1)]
+    currpath = set([(starti, startj, 0, 1)])
     dfs(starti, startj, 0, 1, targeti, targetj, 0, maxcost, currpath, allpaths, visited)
     valid_nodes = set()
     for path in allpaths:
@@ -47,15 +47,15 @@ def dfs(i, j, di, dj, targeti, targetj, currcost, maxcost, currpath, allpaths, m
     if currcost>maxcost or currcost>mincosts[(i, j, di, dj)]:
         return
     if i==targeti and j==targetj and currcost==maxcost:
-        allpaths.append(currpath[:])
+        allpaths.append(list(currpath))
         return
     neighbs = [(1, i+di, j+dj, di, dj), (1000, i, j, -dj, di), (1000, i, j, dj, -di)]
     for neighb_cost, ii, jj, dii, djj in neighbs:
         if (ii, jj, dii, djj) in currpath or grid[ii][jj]=="#":
             continue
-        currpath.append((ii, jj, dii, djj))
+        currpath.add((ii, jj, dii, djj))
         dfs(ii, jj, dii, djj, targeti, targetj, currcost+neighb_cost, maxcost, currpath, allpaths, mincosts)
-        currpath.pop()
+        currpath.remove((ii, jj, dii, djj))
 fname = "day16_input.txt"
 with open(fname) as file:
     grid = file.read().split()
