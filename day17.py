@@ -58,25 +58,23 @@ def opcode6(registers, param, i):
 def opcode7(registers, param, i):
     registers[2] = registers[0]>>combo(registers, param)
     return i+2
-    
+
 def part2(program):
-    ll = len(program)
-    suffixes = {0}
-    coeff = 1
+    prefixes = {0}
     res = float("inf")
-    for target_length in range(1, ll+1):
-        suffixes_new = set()
-        for suffix in suffixes:
-            for i in range(4096):
-                a = i*coeff+suffix
+    for target_length in range(1, len(program)+1):
+        prefixes_new = set()
+        for prefix in prefixes:
+            for i in range(8):
+                a = prefix*8+i
                 output = run(a, 0, 0, program)
-                if output[:target_length] == program[:target_length]:
-                    suffixes_new.add(a%(8*coeff))
-                if output==program:
+                if output[-target_length:]==program[-target_length:]:
+                    prefixes_new.add(a)
+                if output == program:
                     res = min(res, a)
-        suffixes = suffixes_new
-        coeff*=8
+        prefixes = prefixes_new
     print(res)
+
     
 fname = "day17_input.txt"
 with open(fname) as file:
