@@ -1,4 +1,4 @@
-def part1(grid, thresh):
+def solve(grid, thresh):
     for i, row in enumerate(grid):
         for j, char in enumerate(row):
             if char=="S":
@@ -6,36 +6,19 @@ def part1(grid, thresh):
             if char=="E":
                 targeti, targetj = i, j
     dist = bfs(grid, starti, startj)
-    T = dist[(targeti, targetj)]
-    res = 0
-    for i, j in dist:
-        for ii, jj in [(i-2, j), (i+2, j), (i, j-2), (i, j+2), (i+1, j+1), (i+1, j-1), (i-1, j+1), (i-1, j-1)]:
-            if (ii, jj) not in dist:
-                continue
-            #total_time = dist[(i, j)]+T-dist[(ii, jj)]+2
-            time_save = dist[(ii, jj)]-dist[(i, j)]-2
-            if time_save>=thresh:
-                res+=1
-    print(res)
-
-def part2(grid, thresh, maxd):
-    for i, row in enumerate(grid):
-        for j, char in enumerate(row):
-            if char=="S":
-                starti, startj = i, j
-            if char=="E":
-                targeti, targetj = i, j
-    dist = bfs(grid, starti, startj)
-    res = 0
+    res1 = 0
+    res2 = 0
     for i, j in dist:
         for i2, j2 in dist:
             d = abs(i-i2)+abs(j-j2)
-            if d>maxd:
+            if d>20:
                 continue
             time_save = dist[(i2, j2)]-dist[(i, j)]-d
             if time_save>=thresh:
-                res+=1
-    print(res)
+                res2+=1
+            if d<=2 and time_save>=thresh:
+                res1+=1
+    print(res1, res2)
 
 def bfs(grid, starti, startj):
     n, m = len(grid), len(grid[0])
@@ -57,5 +40,4 @@ def bfs(grid, starti, startj):
 fname, thresh = "day20_input.txt", 100
 with open(fname) as file:
     grid = file.read().split()
-part1(grid, thresh)
-part2(grid, thresh, 20)
+solve(grid, thresh)
