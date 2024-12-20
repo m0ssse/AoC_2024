@@ -18,7 +18,7 @@ def part1(grid, thresh):
                 res+=1
     print(res)
 
-def part2_dumb(grid, thresh, maxd):
+def part2(grid, thresh, maxd):
     for i, row in enumerate(grid):
         for j, char in enumerate(row):
             if char=="S":
@@ -58,4 +58,4 @@ fname, thresh = "day20_input.txt", 100
 with open(fname) as file:
     grid = file.read().split()
 part1(grid, thresh)
-part2_dumb(grid, thresh, 20)
+part2(grid, thresh, 20)
